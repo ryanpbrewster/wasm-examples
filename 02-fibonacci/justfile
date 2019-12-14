@@ -12,3 +12,6 @@ inspect: _quiet-build
 
 test: _quiet-build
   node test.js
+
+doc:
+  @google-chrome https://webassembly.github.io/spec/core/syntax/instructions.html

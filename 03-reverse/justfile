@@ -8,7 +8,7 @@ _quiet-build:
   wasm-pack build --release --target=nodejs 2> /dev/null
 
 inspect: _quiet-build
-  wasm2wat pkg/reverse_bg.wasm
+  wasm2wat pkg/reverse_bg.wasm | less
 
 test: _quiet-build
   node test.js
