@@ -1,5 +1,5 @@
 tour:
-  cat src/lib.rs
+  @cat src/lib.rs
 
 build:
   wasm-pack build --release
