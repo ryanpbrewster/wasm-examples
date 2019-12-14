@@ -1,6 +1,6 @@
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn square(n: i32) -> i32 {
-    n * n
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
 }
