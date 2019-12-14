@@ -5,6 +5,6 @@
 - Actually build the project: `wasm-pack build --release`
 
 - Look at the outputs:
-  - `wasm2wat pkg/square_bg.wasm`
+  - `wasm2wat pkg/add_bg.wasm`
 
 - Test the function directly: `node test.js`
