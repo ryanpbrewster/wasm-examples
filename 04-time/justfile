@@ -12,9 +12,3 @@ inspect: _quiet-build
 
 test: _quiet-build
   node test.js
-
-build-heavy:
-  cargo build --release --target=wasm32-wasi
-
-show-heavy: build-heavy
-  ls -lh target/wasm32-wasi/release/
