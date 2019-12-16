@@ -1,0 +1,21 @@
+<button id="myButton">Click me!</button>
+<ul id="myList"></ul>
+
+<script>
+function add_list_item(text) {
+  const item = document.createElement("li");
+  item.innerText = text;
+  document.getElementById("myList").appendChild(item);
+}
+</script>
+<script type="module">
+  import init, { do_wasm_stuff } from './pkg/dom.js';
+
+  init().then(() => {
+    let n = 0;
+    document.getElementById("myButton").addEventListener("click", () => {
+      do_wasm_stuff(n++);
+    });
+  });
+</script>
+
