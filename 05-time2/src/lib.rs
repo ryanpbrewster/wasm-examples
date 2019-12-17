@@ -2,7 +2,7 @@ use chrono::{SecondsFormat, TimeZone, Utc};
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-extern {
+extern "C" {
     #[wasm_bindgen(js_namespace = Date)]
     fn now() -> f64;
 }
@@ -18,7 +18,7 @@ fn prettify(t: i64) -> String {
 }
 
 fn unix_timestamp() -> i64 {
-  now() as i64 / 1_000
+    now() as i64 / 1_000
 }
 
 #[cfg(test)]

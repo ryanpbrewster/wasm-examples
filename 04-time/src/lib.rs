@@ -7,8 +7,8 @@ pub fn pretty_time() -> String {
     prettify(unix_timestamp())
 }
 
-fn prettify(t: i64) -> String {
-    Utc.timestamp(t, 0)
+fn prettify(seconds: i64) -> String {
+    Utc.timestamp(seconds, /* nanos = */ 0)
         .to_rfc3339_opts(SecondsFormat::Secs, true)
 }
 
@@ -18,6 +18,23 @@ fn unix_timestamp() -> i64 {
         .expect("could not read system clock")
         .as_secs() as i64
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #[cfg(test)]
 mod test {
