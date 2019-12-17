@@ -12,3 +12,5 @@ test:
 
 serve: _quiet-build
   python -m SimpleHTTPServer 8080
+
+prep: build

@@ -12,3 +12,5 @@ inspect: _quiet-build
 
 test: _quiet-build
   node test.js
+
+prep: build

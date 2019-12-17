@@ -9,3 +9,5 @@ inspect: _quiet-build
 
 serve: _quiet-build
   cargo web start --release --port=8080
+
+prep: build

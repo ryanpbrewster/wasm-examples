@@ -9,3 +9,5 @@ inspect: node
 
 run-node: node
   node $(go env GOROOT)/misc/wasm/wasm_exec.js hello.wasm
+
+prep:

@@ -1,2 +1,2 @@
 prep:
-  for d in */; do just $d/build; done
+  find . -name justfile -mindepth 2 -exec just -f {} prep \;

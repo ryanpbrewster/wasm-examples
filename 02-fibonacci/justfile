@@ -15,3 +15,5 @@ test: _quiet-build
 
 doc:
   @google-chrome https://webassembly.github.io/spec/core/syntax/instructions.html
+
+prep: build
