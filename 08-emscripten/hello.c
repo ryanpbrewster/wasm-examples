@@ -9,7 +9,7 @@ int main() {
 }
 
 int sum_of_primes(int hi) {
-  bool arr[hi + 1];
+  bool arr[hi];
   for (int i=0; i < hi; i++) {
     arr[i] = true;
   }
