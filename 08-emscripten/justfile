@@ -1,0 +1,17 @@
+clean:
+  @git clean -xdf
+
+native: clean
+  gcc hello.c -o native.exe
+
+node: clean
+  emcc hello.c
+
+browser: clean
+  emcc hello.c -o index.html
+
+inspect: node
+  wasm2wat a.out.wasm | less
+
+serve: browser
+  python -m SimpleHTTPServer 8080
