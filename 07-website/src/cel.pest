@@ -1,0 +1,47 @@
+TopLevel = { SOI ~ LetBinding* ~ Expression ~ EOI }
+LetBinding = { "let" ~ Identifier ~ "=" ~ Expression ~ ";" }
+Expression = _{ Ternary | Disjunction }
+
+Ternary = { Disjunction ~ "?" ~ Expression ~ ":" ~ Expression }
+Disjunction = { Conjunction ~ ("||" ~ Conjunction)* }
+Conjunction = { Relation ~ ("&&" ~ Relation)* }
+Relation = { Addition ~ (RelOp ~ Addition)* }
+RelOp = { "==" | "!=" | "<=" | ">=" | "<" | ">" }
+Addition = { Multiplication ~ (AddOp ~ Multiplication)* }
+AddOp = { "+" | "-" }
+Multiplication = { Unary ~ (MulOp ~ Unary)* }
+MulOp = { "*" | "/" | "%" }
+Unary = { Member | UnaryOp ~ Unary }
+UnaryOp = { "-" | "!" }
+Member = { Operand ~ (("." ~ (MethodCall | MemberRef)) | Index)* }
+Operand = { Literal | FunctionCall | Identifier | "(" ~ Expression ~ ")" }
+MethodCall = { Identifier ~ Args }
+FunctionCall = { Identifier ~ Args }
+MemberRef = { Identifier }
+Args = { "(" ~ (Expression ~ ",")* ~ Expression? ~ ")" }
+Index = { "[" ~ Expression ~ "]" }
+Literal = { StringLiteral | BytesLiteral | FloatLiteral | IntLiteral | ListLiteral | BoolLiteral | NullLiteral | MapLiteral }
+StringLiteral = ${ PUSH(OPEN_STR) ~ (CharLiteral | Escape)* ~ POP }
+BytesLiteral = ${ "b" ~ PUSH(OPEN_STR) ~ (CharLiteral | Escape)* ~ POP }
+OPEN_STR = _{ "\"" | "'" }
+CharLiteral = { !("\\" | OPEN_STR) ~ ANY }
+Escape = @{ "\\" ~ ("\"" | "n" | "t" | OctalSequence | HexSequence | UnicodeSequence ) }
+OctalSequence = @{ ('0' .. '3') ~ ASCII_OCT_DIGIT{2} }
+HexSequence = @{ "x" ~ ASCII_HEX_DIGIT{2} }
+UnicodeSequence = @{ "u" ~ ASCII_HEX_DIGIT{4} }
+
+IntLiteral = @{ Digits }
+FloatLiteral = @{ Digits ~ "." ~ Digits }
+Digits = _{ ASCII_DIGIT ~ (ASCII_DIGIT | "_")* }
+
+ListLiteral = { "[" ~ ExpressionList? ~ "]" }
+ExpressionList = _{ Expression ~ ("," ~ Expression)* ~ ","? }
+
+MapLiteral = { "{" ~ MapFields? ~ "}" }
+MapFields = _{ MapField ~ ("," ~ MapField)* ~ ","? }
+MapField = { Expression ~ ":" ~ Expression }
+
+BoolLiteral = @{ "false" | "true" }
+NullLiteral = @{ "null" }
+Identifier = @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC | "_")* }
+WHITESPACE = _{ " " | "\n" }

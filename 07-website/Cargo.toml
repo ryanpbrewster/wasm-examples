@@ -1,0 +1,14 @@
+[package]
+name = "stack-machine"
+version = "0.1.0"
+authors = ["Ryan Brewster <ryanpbrewster@google.com>"]
+edition = "2018"
+
+[profile.release]
+opt-level = "z"
+
+[dependencies]
+pest = "^2.0"
+pest_derive = "^2.0"
+yew = "0.10"
+stdweb = "0.4.20"
