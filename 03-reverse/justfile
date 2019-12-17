@@ -13,4 +13,8 @@ inspect: _quiet-build
 test: _quiet-build
   node test.js
 
+tiny:
+  cp .tiny/Cargo.toml Cargo.toml
+  cp .tiny/lib.rs src/lib.rs
+
 prep: build
