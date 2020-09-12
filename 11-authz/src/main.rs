@@ -6,22 +6,19 @@ static WASM: &'static [u8] = include_bytes!("../policy/pkg/policy_bg.wasm");
 fn main() -> error::Result<()> {
     let import_object = imports! {};
 
-    let module = compile_with(&WASM, &get_metered_compiler(1_000_000)).unwrap();
+    let module = compile_with(&WASM, &get_metered_compiler(10_000_000)).unwrap();
     let mut instance = module.instantiate(&import_object)?;
 
-    let host_string = r#"{"auth":{"uid":"foo"}}"#;
-    // Write the string into the lineary memory
+    let host_string = r#"{"auth":{"uid":"hannah"}}"#;
+    // Write the string into the linear memory
     let memory = instance.context_mut().memory(0);
-    for (byte, cell) in host_string
-        .bytes()
-        .zip(memory.view()[0 as usize..(host_string.len()) as usize].iter())
-    {
+    for (byte, cell) in host_string.bytes().zip(memory.view().iter()) {
         cell.set(byte);
     }
 
     let result = instance.call(
         "allow",
-        &[Value::I32(0), Value::I32(host_string.len() as _)],
+        &[Value::I32(0), Value::I32(host_string.len() as i32)],
     )?;
 
 

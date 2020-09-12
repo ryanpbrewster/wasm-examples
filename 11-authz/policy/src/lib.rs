@@ -12,7 +12,7 @@ pub fn allow(request: &str) -> bool {
         Ok(value) => value,
         Err(_) => return false,
     };
-    request.auth.uid == "rpb" && request.params.is_empty()
+    request.params.is_empty() && request.auth.uid.chars().zip(request.auth.uid.chars().rev()).all(|(a, b)| a == b)
 }
 
 #[derive(Deserialize)]
@@ -33,7 +33,7 @@ mod test {
 
     #[test]
     fn simple_allow() {
-        assert!(allow(r#"{"auth":{"uid":"rpb"}}"#));
+        assert!(allow(r#"{"auth":{"uid":"hannah"}}"#));
     }
 
     #[test]
@@ -43,6 +43,6 @@ mod test {
 
     #[test]
     fn wrong_params() {
-        assert!(!allow(r#"{"auth":{"uid":"rpb"},"params":{"a":4}}"#));
+        assert!(!allow(r#"{"auth":{"uid":"hannah"},"params":{"a":4}}"#));
     }
 }
