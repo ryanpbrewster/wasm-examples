@@ -25,10 +25,9 @@ fn main() -> error::Result<()> {
 
 pub fn get_metered_compiler(limit: u64) -> impl Compiler {
     use wasmer_singlepass_backend::ModuleCodeGenerator as SinglePassMCG;
-    let c: StreamingCompiler<SinglePassMCG, _, _, _, _> = StreamingCompiler::new(move || {
+    StreamingCompiler::<SinglePassMCG, _, _, _, _>::new(move || {
         let mut chain = MiddlewareChain::new();
         chain.push(metering::Metering::new(limit));
         chain
-    });
-    c
+    })
 }
