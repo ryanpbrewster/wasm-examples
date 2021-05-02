@@ -1,7 +1,7 @@
 use wasmer_middleware_common::metering;
 use wasmer_runtime::{compile_with, error, imports, Compiler, MiddlewareChain, StreamingCompiler};
 
-static WASM: &'static [u8] = include_bytes!("../fibonacci_bg.wasm");
+static WASM: &'static [u8] = include_bytes!("../../fibonacci_bg.wasm");
 
 fn main() -> error::Result<()> {
     let import_object = imports! {};

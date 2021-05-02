@@ -1,10 +1,9 @@
 [package]
-name = "gas"
+name = "gas-wasmtime"
 version = "0.1.0"
 authors = ["Ryan Brewster <ryanpbrewster@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-wasmer-runtime = "0.17.1"
-wasmer-singlepass-backend = "0.17.1"
-wasmer-middleware-common = "0.17.1"
+anyhow = "1.0"
+wasmtime = "0.26"
