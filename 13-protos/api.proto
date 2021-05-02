@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package rpb.example;
+
+message MyInput {
+  bool my_bool = 1;
+  int32 my_i32 = 2;
+  float my_f32 = 3;
+  string my_string = 4;
+  bytes my_bytes = 5;
+  repeated Record records = 6;
+  
+  message Record {
+    string id = 1;
+    map<string, string> params = 2;
+  }
+}
+
+enum Outcome {
+  UNKNOWN = 0;
+  ACCEPT = 1;
+  REJECT = 2;
+}
