@@ -1,7 +1,7 @@
 use wasmer_middleware_common::metering;
 use wasmer_runtime::{compile_with, error, imports, Compiler, MiddlewareChain, StreamingCompiler};
 
-static WASM: &'static [u8] = include_bytes!("../../fibonacci_bg.wasm");
+static WASM: &'static [u8] = include_bytes!("../../fibonacci.wasm");
 
 fn main() -> error::Result<()> {
     let import_object = imports! {};
@@ -10,7 +10,7 @@ fn main() -> error::Result<()> {
     let instance = module.instantiate(&import_object)?;
 
     for n in 1.. {
-        let result = instance.call("fibrec", &[n.into()])?;
+        let result = instance.call("fibonacci", &[n.into()])?;
         let gas = metering::get_points_used(&instance);
         println!(
             "consumed {} to compute fib({}) = {}",

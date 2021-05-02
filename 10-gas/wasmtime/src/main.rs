@@ -8,9 +8,9 @@ fn main() -> Result<()> {
     let store = Store::new(&engine);
     store.add_fuel(1_000_000)?;
 
-    let module = Module::from_file(store.engine(), "../fibonacci_bg.wasm")?;
+    let module = Module::from_file(store.engine(), "../fibonacci.wasm")?;
     let instance = Instance::new(&store, &module, &[])?;
-    let entrypoint = instance.get_typed_func::<i32, i32>("fibrec")?;
+    let entrypoint = instance.get_typed_func::<i32, i32>("fibonacci")?;
 
     for n in 1.. {
         let before = store.fuel_consumed().unwrap();
